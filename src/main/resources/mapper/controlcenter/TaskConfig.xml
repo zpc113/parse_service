@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zpc.dao.TaskConfigDao">
+
+    <!-- 根据 taskId查找任务配置 -->
+    <select id="findByTaskId" parameterType="long" resultType="TaskConfig">
+        select task_id , script , seed_url , thread_num , accept_code , data_table_name
+        from cloud_crawler_task_config where task_id = #{taskId};
+    </select>
+
+    <!-- 配置任务 -->
+    <insert id="create" parameterType="TaskConfig">
+        insert into cloud_crawler_task_config(task_id , script , seed_url , thread_num , accept_code , data_table_name)
+        value(#{taskId} , #{script} , #{seedUrl} , #{threadNum} , #{acceptCode} , #{dataTableName});
+    </insert>
+
+    <!-- 更新任务配置 -->
+    <update id="updateTaskConfig" parameterType="TaskConfig">
+        UPDATE
+          cloud_crawler_task_config
+        SET
+          script = #{script},
+          seed_url = #{seedUrl},
+          thread_num = #{threadNum},
+          accept_code = #{acceptCode},
+          data_table_name = #{dataTableName}
+        WHERE
+          task_id = #{taskId};
+    </update>
+</mapper>

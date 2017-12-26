@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zpc.dao.datacenter.DataInfoDao">
+
+    <!-- 批量插入数据 -->
+    <insert id="saveData">
+        insert into ${tableName}(schedule_id , dt , data_info)
+        VALUES
+          <foreach collection="dataInfos" item="data" index="index" separator=",">
+              (#{data.scheduleId},#{data.dt},#{data.dataInfo})
+          </foreach>;
+    </insert>
+
+</mapper>
