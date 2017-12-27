@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,8 +104,15 @@ public class Parse {
                         String queueName = containerName.split("_scheduleId_")[0];
                         orderMessage.setContainerName(queueName);
                         try {
-                            sendMessage.sendParseMessage(orderMessage , RoutingKey.QUEUE_ROUTINGKEY);
+                            RestTemplate rest = new RestTemplate();
+                            String url = "http://localhost:8080/queue/put";
+                            boolean postResult = rest.postForObject(url , orderMessage , Boolean.class , (Object[]) null);
                             logger.info("发送request到队列服务器成功" + request.toString());
+                            if (postResult) {
+                                logger.info("url入队列成功" + orderMessage.toString());
+                            } else {
+                                logger.info("url入队列失败" + orderMessage.toString());
+                            }
                         } catch (Exception e) {
                             logger.error(e.getMessage() , "发送request到队列服务器失败" + request.toString());
                         }

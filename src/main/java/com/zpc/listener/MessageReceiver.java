@@ -94,15 +94,25 @@ public class MessageReceiver implements MessageListener {
             } else if (ControlExecutorOrder.PARSE.equals(order)) {
                 // 开始从数据库拿页面并解析
                 ExecutorService executorService = executorPool.getExecutors().get(containerName);
-                for (int i = 0 ; i < 10 ; i ++) {
-                    executorService.execute(new Runnable() {
-                        public void run() {
-                            parse.parse(containerName , script , tableName);
-                        }
-                    });
+                if (executorService != null) {
+                    for (int i = 0 ; i < 10 ; i ++) {
+                        executorService.execute(new Runnable() {
+                            public void run() {
+                                parse.parse(containerName , script , tableName);
+                            }
+                        });
+                    }
                 }
+            } else if (ControlExecutorOrder.SUSPEND.equals(order)) {
+                ExecutorService executorService = executorPool.getExecutors().get(containerName);
+                executorPool.getExecutors().remove(containerName);
+                executorService.shutdown();
+                logger.info("线程池已销毁" + containerName);
             } else if (ControlExecutorOrder.DESTROY.equals(order)) {
-
+                ExecutorService executorService = executorPool.getExecutors().get(containerName);
+                executorPool.getExecutors().remove(containerName);
+                executorService.shutdownNow();
+                logger.info("线程池已销毁" + containerName);
             }
         } catch (Exception e) {
             logger.error(e.getMessage() , "接收消息失败");
