@@ -113,6 +113,8 @@ public class MessageReceiver implements MessageListener {
                 executorPool.getExecutors().remove(containerName);
                 executorService.shutdownNow();
                 logger.info("线程池已销毁" + containerName);
+                // 清除redis队列
+                redisDao.remove(containerName);
             }
         } catch (Exception e) {
             logger.error(e.getMessage() , "接收消息失败");

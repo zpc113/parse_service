@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="edf3a90b-3a1a-4a67-9ed0-aae10fb7857b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zpc/dao/redis/RedisDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/zpc/dao/redis/RedisDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zpc/listener/MessageReceiver.java" afterPath="$PROJECT_DIR$/src/main/java/com/zpc/listener/MessageReceiver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zpc/parse/Parse.java" afterPath="$PROJECT_DIR$/src/main/java/com/zpc/parse/Parse.java" />
     </list>
@@ -24,11 +25,24 @@
       <file leaf-file-name="MessageReceiver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/zpc/listener/MessageReceiver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="727">
-              <caret line="100" column="40" lean-forward="false" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
+            <state relative-caret-position="700">
+              <caret line="102" column="27" lean-forward="true" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
               <folding>
                 <element signature="e#4257#4458#0" expanded="true" />
                 <element signature="e#4457#4458#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RedisDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/zpc/dao/redis/RedisDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="467">
+              <caret line="28" column="25" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+              <folding>
+                <element signature="e#975#976#0" expanded="true" />
+                <element signature="e#1035#1036#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,11 +79,9 @@
       <file leaf-file-name="Parse.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/zpc/parse/Parse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="107" column="75" lean-forward="true" selection-start-line="107" selection-start-column="75" selection-end-line="107" selection-end-column="75" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1512">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -205,7 +217,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/zpc/dtcrawler/Result.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zpc/send/SendMessage.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/zpc/dao/redis/RedisDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-rabbitMQ.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/zpc/dto/ControlExecutorOrder.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/page/Page.xml" />
@@ -214,6 +225,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/zpc/dto/Request.java" />
         <option value="$PROJECT_DIR$/src/test/java/junit/test/ZPC.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zpc/listener/MessageReceiver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zpc/dao/redis/RedisDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zpc/parse/Parse.java" />
       </list>
     </option>
@@ -1483,7 +1495,7 @@
       <workItem from="1513257057252" duration="8437000" />
       <workItem from="1513604543889" duration="12112000" />
       <workItem from="1513952239078" duration="6533000" />
-      <workItem from="1514381754129" duration="2691000" />
+      <workItem from="1514381754129" duration="6401000" />
     </task>
     <task id="LOCAL-00001" summary="修改测试">
       <created>1514304460658</created>
@@ -1492,11 +1504,18 @@
       <option name="project" value="LOCAL" />
       <updated>1514304460658</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="暂停功能代码上传，发送url到queue方式转变为RestTemplate">
+      <created>1514387277639</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1514387277639</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53063000" />
+    <option name="totallyTimeSpent" value="56773000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1553,7 +1572,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修改测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改测试" />
+    <MESSAGE value="暂停功能代码上传，发送url到queue方式转变为RestTemplate" />
+    <option name="LAST_COMMIT_MESSAGE" value="暂停功能代码上传，发送url到queue方式转变为RestTemplate" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1928,13 +1948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zpc/dao/redis/RedisDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="54" column="51" lean-forward="false" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4698">
@@ -2052,17 +2065,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zpc/listener/MessageReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="727">
-          <caret line="100" column="40" lean-forward="false" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
-          <folding>
-            <element signature="e#4257#4458#0" expanded="true" />
-            <element signature="e#4457#4458#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://F:/repository/org/springframework/spring-web/4.1.7.RELEASE/spring-web-4.1.7.RELEASE.jar!/org/springframework/web/client/RestTemplate.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
@@ -2071,13 +2073,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zpc/listener/MessageReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="102" column="27" lean-forward="true" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+          <folding>
+            <element signature="e#4257#4458#0" expanded="true" />
+            <element signature="e#4457#4458#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zpc/dao/redis/RedisDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="28" column="25" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+          <folding>
+            <element signature="e#975#976#0" expanded="true" />
+            <element signature="e#1035#1036#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/zpc/parse/Parse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="107" column="75" lean-forward="true" selection-start-line="107" selection-start-column="75" selection-end-line="107" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-1512">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

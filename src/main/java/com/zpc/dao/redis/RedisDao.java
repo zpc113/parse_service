@@ -21,22 +21,19 @@ public class RedisDao {
 
     /**
      * url是否已爬取
-     * 效率很低，后期需要优化
+     * 使用set添加url到redis服务器，自动去重
      * @param url
      * @param containerName
      * @return
      */
     public boolean isContains(String url , String containerName) {
-
-        boolean end;
+        long setNum = 0;
         synchronized (jedisPool) {
-            end = jedisPool.getResource().lrange(containerName , 0 , Long.MAX_VALUE).contains(url);
-            if (!end) {
-                // 如果没有爬取过，就放到去重队列中
-                jedisPool.getResource().lpush(containerName , url);
-            }
+            setNum = jedisPool.getResource().sadd(containerName , url);
         }
-        return end;
+        if (setNum == 1)
+            return false;
+        return false;
     }
 
     /**
