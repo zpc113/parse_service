@@ -1,30 +1,15 @@
 package junit.test;
 
-
-import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.TimeUnit;
 
 class ZPC {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<String> queue = new LinkedBlockingDeque<String>();
+        queue.put("测试");
+        System.out.println(queue.poll(5000 , TimeUnit.MILLISECONDS));
 
-        int num = 1211;
-        int length = (num + "").length();
-        boolean b = false;
-        int half = length / 2;
-        for (int i = 0 ; i <= half ; i ++) {
-            String temp = num + "";
-            char begin = temp.charAt(i);
-            char end = temp.charAt(length - 1 - i);
-            if (begin == end) {
-                b = true;
-            } else {
-                b = false;
-                break;
-            }
-        }
-        if (b) {
-            System.out.println("修改测试");
-        }
     }
-
 
 }

@@ -16,4 +16,10 @@ public class ControlExecutorOrder {
 
     public static final String PARSE = "parse";   // 解析服务器需要从数据库获取对应的页面并解析
 
+    public static final String COMPLETE = "complete";   // 任务完成指令
+
+    public static final String READY = "ready";   // 线程池已初始化完成
+
+    public static final String RECOVER = "recover"; // 恢复线程池
+
 }

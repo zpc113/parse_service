@@ -41,7 +41,7 @@ public class RedisDao {
      * @param containerName
      */
     public void create(String containerName) {
-        jedisPool.getResource().lpush(containerName);
+        jedisPool.getResource().sadd(containerName);
     }
 
     /**
