@@ -37,4 +37,6 @@ public interface ScheduleDao {
      * @return
      */
     Schedule findById(long scheduleId);
+
+    Schedule getSchedule(@Param("taskId") long taskId);
 }

@@ -1,12 +1,15 @@
 package com.zpc.listener;
 
+import com.zpc.dao.controlcenter.ScheduleDao;
 import com.zpc.dao.controlcenter.TaskConfigDao;
+import com.zpc.dao.controlcenter.TaskInfoDao;
 import com.zpc.dao.page.PageTableDao;
 import com.zpc.dao.redis.RedisDao;
 import com.zpc.dto.ControlExecutorOrder;
 import com.zpc.dto.OrderMessage;
 import com.zpc.dto.RoutingKey;
 import com.zpc.dto.TaskOrder;
+import com.zpc.entity.controlcenter.Schedule;
 import com.zpc.entity.controlcenter.TaskConfig;
 import com.zpc.executors.ExecutorPool;
 import com.zpc.parse.Parse;
@@ -21,6 +24,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -45,6 +49,10 @@ public class MessageReceiver implements MessageListener {
     private RedisDao redisDao;
     @Autowired
     private PageTableDao pageTableDao;
+    @Autowired
+    private TaskInfoDao taskInfoDao;
+    @Autowired
+    private ScheduleDao scheduleDao;
     /**
      * 接收消息
      * @param message
@@ -91,6 +99,21 @@ public class MessageReceiver implements MessageListener {
                     logger.info("已通知下载服务初始化下载线程池" + containerName);
                 } else {
                     // 没有新增的request，需要以下几个操作：1、停止任务 2、删除队列
+                    taskInfoDao.updateRunStatus(taskId , 0);
+                    logger.info("任务运行状态设置为已完成,taskId : " + taskId);
+                    // 设置调度已完成
+                    Schedule schedule = scheduleDao.getSchedule(taskId);
+                    scheduleDao.setEnd(new Date() , schedule.getScheduleId());
+                    // 通知云队列服务销毁队列
+                    OrderMessage orderMessageToQueue = new OrderMessage();
+                    orderMessageToQueue.setContainerName(containerName.split("_")[0]);
+                    orderMessageToQueue.setOrder(ControlExecutorOrder.COMPLETE);
+                    try {
+                        sendMessage.sendQueueMessage(orderMessageToQueue , RoutingKey.QUEUE_ROUTINGKEY);
+                        logger.info("发送销毁队列指令到云队列服务成功-->" + orderMessageToQueue.toString());
+                    } catch (Exception e) {
+                        logger.error(e.getMessage() , "发送销毁队列指令到云队列服务失败-->" + orderMessageToQueue.toString());
+                    }
                 }
             } else if (ControlExecutorOrder.PARSE.equals(order)) {
                 // 开始从数据库拿页面并解析

@@ -6,8 +6,13 @@
 
     <!-- 新建调度 -->
     <insert id="save">
-        insert into ${tableName}(page_string)
-        VALUE(#{pageString});
+    insert into ${tableName}(page_string)
+    VALUE(#{pageString});
+  </insert>
+
+    <insert id="saveParsed">
+        insert into ${tableName}(page_string , page_id)
+        VALUE(#{pageString} , #{pageId});
     </insert>
 
     <select id="getPage" resultType="Page">

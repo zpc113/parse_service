@@ -17,6 +17,12 @@
         FROM cloud_crawler_schedule WHERE schedule_id = #{scheduleId};
     </select>
 
+    <select id="getSchedule" parameterType="long" resultType="Schedule">
+        SELECT schedule_id , task_id , start_time , end_time , dt ,
+        success_num , failed_num , request_num , data_num , surplus_number
+        FROM cloud_crawler_schedule WHERE task_id = #{taskId} and end_time is empty;
+    </select>
+
     <update id="update">
         UPDATE
           cloud_crawler_schedule
